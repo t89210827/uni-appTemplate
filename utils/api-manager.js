@@ -1,5 +1,5 @@
 import Fly from 'flyio/dist/npm/wx'
-import { judgeIsAnyNullStr } from './api-common'
+import { judgeIsAnyNullStr } from './common'
 const fly = new Fly()
 const DEDUG = 1
 let host = ""

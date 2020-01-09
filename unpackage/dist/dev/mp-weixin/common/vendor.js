@@ -9450,7 +9450,7 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getQiniuToken = getQiniuToken;exports.chooseImage = chooseImage;exports.uploadImg = uploadImg;exports.saveImage = saveImage;exports.ctxQiniuUpload = ctxQiniuUpload;exports.chooseVideo = chooseVideo;exports.wxPay = wxPay;exports.getWindowHeight = getWindowHeight;exports.wxLogin = wxLogin;exports.auth_login = auth_login;exports.byLevelGetUserInfo = byLevelGetUserInfo;exports.verifyUserInfoStorage = verifyUserInfoStorage;exports.verifyUserInfo = verifyUserInfo;exports.updateUserinfo = updateUserinfo;exports.decryptData = decryptData;exports.updataXcx = updataXcx;exports.getSetting = getSetting;exports.showToast = showToast;exports.getSearchHistoryWords = getSearchHistoryWords;exports.storeSearchHistoryWord = storeSearchHistoryWord;exports.showModal = showModal;exports.setShareInfo = setShareInfo;exports.getShareInfo = getShareInfo;exports.getQueryString = getQueryString;exports.showLoading = showLoading;exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));var _apiCommon = __webpack_require__(/*! @/utils/api-common */ 25);
+Object.defineProperty(exports, "__esModule", { value: true });exports.getQiniuToken = getQiniuToken;exports.chooseImage = chooseImage;exports.uploadImg = uploadImg;exports.saveImage = saveImage;exports.ctxQiniuUpload = ctxQiniuUpload;exports.chooseVideo = chooseVideo;exports.wxPay = wxPay;exports.getWindowHeight = getWindowHeight;exports.wxLogin = wxLogin;exports.auth_login = auth_login;exports.byLevelGetUserInfo = byLevelGetUserInfo;exports.verifyUserInfoStorage = verifyUserInfoStorage;exports.verifyUserInfo = verifyUserInfo;exports.updateUserinfo = updateUserinfo;exports.decryptData = decryptData;exports.updataXcx = updataXcx;exports.getSetting = getSetting;exports.showToast = showToast;exports.getSearchHistoryWords = getSearchHistoryWords;exports.storeSearchHistoryWord = storeSearchHistoryWord;exports.showModal = showModal;exports.setShareInfo = setShareInfo;exports.getShareInfo = getShareInfo;exports.getQueryString = getQueryString;exports.showLoading = showLoading;exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));var _common = __webpack_require__(/*! @/utils/common */ 25);
 var _apiManager = _interopRequireDefault(__webpack_require__(/*! ./api-manager */ 26));
 var _projectApi = __webpack_require__(/*! ./project-api */ 28);
 
@@ -9813,7 +9813,7 @@ function _updateUserinfo() {_updateUserinfo = _asyncToGenerator( /*#__PURE__*/_r
 
 
 //更新小程序
-function _decryptData() {_decryptData = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee7(encrypted_data, iv, code) {var ret, userInfo;return _regenerator.default.wrap(function _callee7$(_context7) {while (1) {switch (_context7.prev = _context7.next) {case 0:_context7.next = 2;return _apiManager.default.request({ method: _projectApi.api.wechat_decryptData.method, url: _projectApi.api.wechat_decryptData.url, body: { code: code, encryptedData: (0, _apiCommon.base64encode)(encrypted_data), iv: (0, _apiCommon.base64encode)(iv) } });case 2:ret = _context7.sent;userInfo = ret.ret;console.log("消息解密" + JSON.stringify(userInfo));if (userInfo) {wx.setStorageSync('userInfo', userInfo);}return _context7.abrupt("return", userInfo);case 7:case "end":return _context7.stop();}}}, _callee7, this);}));return _decryptData.apply(this, arguments);}function updataXcx() {
+function _decryptData() {_decryptData = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee7(encrypted_data, iv, code) {var ret, userInfo;return _regenerator.default.wrap(function _callee7$(_context7) {while (1) {switch (_context7.prev = _context7.next) {case 0:_context7.next = 2;return _apiManager.default.request({ method: _projectApi.api.wechat_decryptData.method, url: _projectApi.api.wechat_decryptData.url, body: { code: code, encryptedData: (0, _common.base64encode)(encrypted_data), iv: (0, _common.base64encode)(iv) } });case 2:ret = _context7.sent;userInfo = ret.ret;console.log("消息解密" + JSON.stringify(userInfo));if (userInfo) {wx.setStorageSync('userInfo', userInfo);}return _context7.abrupt("return", userInfo);case 7:case "end":return _context7.stop();}}}, _callee7, this);}));return _decryptData.apply(this, arguments);}function updataXcx() {
   // 获取小程序更新机制兼容
   if (wx.canIUse('getUpdateManager')) {
     var updateManager = wx.getUpdateManager();
@@ -9968,18 +9968,18 @@ function getShareInfo(appParam) {
   var scene = appParam.scene;
   scene = decodeURIComponent(scene);
   var shareInfo = {};
-  if (!(0, _apiCommon.judgeIsAnyNullStr)(scene)) {
+  if (!(0, _common.judgeIsAnyNullStr)(scene)) {
     var mch_code = getQueryString("code", scene); //scene中code
     var id = getQueryString("id", scene); //文章详情页面文章id
-    if (!(0, _apiCommon.judgeIsAnyNullStr)(mch_code)) {
+    if (!(0, _common.judgeIsAnyNullStr)(mch_code)) {
       shareInfo.mch_code = mch_code;
     }
-    if (!(0, _apiCommon.judgeIsAnyNullStr)(id)) {
+    if (!(0, _common.judgeIsAnyNullStr)(id)) {
       shareInfo.id = id;
     }
   }
 
-  if (!(0, _apiCommon.judgeIsAnyNullStr)(appParam.a_user_id)) {
+  if (!(0, _common.judgeIsAnyNullStr)(appParam.a_user_id)) {
     shareInfo.a_user_id = appParam.a_user_id;
     _apiManager.default.
     request({
@@ -9995,7 +9995,7 @@ function getShareInfo(appParam) {
       }
     });
   }
-  if (!(0, _apiCommon.judgeIsAnyNullStr)(appParam.shop_store_id)) {
+  if (!(0, _common.judgeIsAnyNullStr)(appParam.shop_store_id)) {
     shareInfo.shop_store_id = appParam.shop_store_id;
   }
   return shareInfo;
@@ -10014,7 +10014,7 @@ function showLoading(title) {
   if (!wx.canIUse('showLoading')) {
     return;
   }
-  if ((0, _apiCommon.judgeIsAnyNullStr)(title)) {
+  if ((0, _common.judgeIsAnyNullStr)(title)) {
     title = "加载中";
   }
   wx.showLoading({
@@ -10030,9 +10030,9 @@ function showLoading(title) {
 
 /***/ }),
 /* 25 */
-/*!****************************************************!*\
-  !*** E:/code/DCloud/demo/demo/utils/api-common.js ***!
-  \****************************************************/
+/*!************************************************!*\
+  !*** E:/code/DCloud/demo/demo/utils/common.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10165,7 +10165,7 @@ function formatTime(date) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.http_flyio = http_flyio;exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));var _wx = _interopRequireDefault(__webpack_require__(/*! flyio/dist/npm/wx */ 27));
-var _apiCommon = __webpack_require__(/*! ./api-common */ 25);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+var _common = __webpack_require__(/*! ./common */ 25);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 var fly = new _wx.default();
 var DEDUG = 1;
 var host = "";
@@ -10185,11 +10185,11 @@ fly.interceptors.request.use(function (request) {
 
   var userInfo = wx.getStorageSync("userInfo");
 
-  if (!(0, _apiCommon.judgeIsAnyNullStr)(userInfo)) {
-    if ((0, _apiCommon.judgeIsAnyNullStr)(request.body.user_id)) {
+  if (!(0, _common.judgeIsAnyNullStr)(userInfo)) {
+    if ((0, _common.judgeIsAnyNullStr)(request.body.user_id)) {
       request.body.user_id = userInfo.id;
     }
-    if ((0, _apiCommon.judgeIsAnyNullStr)(request.body.token)) {
+    if ((0, _common.judgeIsAnyNullStr)(request.body.token)) {
       request.body.token = userInfo.token;
     }
   }
@@ -11094,7 +11094,10 @@ function GetUserLogin(query) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _gangdiedaoUniAxios = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/gangdiedao-uni-axios */ 30));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _gangdiedaoUniAxios = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/gangdiedao-uni-axios */ 30));
+var _common = __webpack_require__(/*! ./common */ 25);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
 
 var DEDUG = 2;
 var host = "";
@@ -11118,7 +11121,6 @@ function _reqlog(req) {
   if (true) {
     console.log("请求地址：" + req.url, req.data || req.params);
   }
-
 }
 
 /**
@@ -11145,18 +11147,34 @@ var http = _gangdiedaoUniAxios.default.create({
 
 // 拦截器 在请求之前拦截
 http.interceptors.request.use(function (config) {
-  _reqlog(config);
-  _gangdiedaoUniAxios.default.defaults.baseURL = 'https://123123';
+  // _reqlog(config)
 
   config.url = host + config.url;
-
-  console.log("在请求之前拦截");
-  console.log("请求地址-------->：" + JSON.stringify(_gangdiedaoUniAxios.default.defaults));
   // code...
   // 获取本地存储的Cookie
   // const cookie = uni.getStorageSync('cookie')
   // 设置Cookie
   // config.headers.Cookie = cookie
+  uni.showLoading({
+    title: '加载中',
+    mask: true });
+
+
+  var userInfo = uni.getStorageSync("userInfo");
+  if (!(0, _common.judgeIsAnyNullStr)(userInfo)) {
+    if ((0, _common.judgeIsAnyNullStr)(request.body.user_id)) {
+      request.body.user_id = userInfo.id;
+    }
+    if ((0, _common.judgeIsAnyNullStr)(request.body.token)) {
+      request.body.token = userInfo.token;
+    }
+  }
+  console.log(JSON.stringify(request));
+  request.headers = {
+    'X-Tag': 'flyio',
+    'content-type': 'application/json' };
+
+
 
 
   return config;
@@ -11164,23 +11182,24 @@ http.interceptors.request.use(function (config) {
 
 // 拦截器 在请求之后拦截
 http.interceptors.response.use(function (response) {
-  _reslog(response);
-  // code...
-  // 获取cookie
-  // let headerStr = JSON.stringify(response.headers)
-  // let cookie = (/(?:Set-Cookie).+;/.exec(headerStr)[0]).replace(/Set-Cookie|:|"/g, "")
-  // if (cookie) {
-  // uni.setStorage({
-  // key: 'cookie',
-  // data: cookie.split(';')[0]
-  // })
-  // }
-  return response;
+  // _reslog(response)
+
+  // console.log("----", JSON.stringify(response))
+  uni.hideLoading();
+  return response; // 请求成功之后将返回值返回
 }, function (error) {
-  return Promise.reject(error.message);
+  // return Promise.reject(error.message)
+
+  // 请求出错，根据返回状态码判断出错原因
+  console.log(JSON.stringify(err));
+  uni.hideLoading();
+  if (err) {
+    return '请求失败';
+  };
 });var _default =
 
 http;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 30 */

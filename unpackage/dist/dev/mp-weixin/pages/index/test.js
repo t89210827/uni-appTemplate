@@ -203,8 +203,6 @@ var _projectApi2 = __webpack_require__(/*! ../../utils/project-api.js */ 28);fun
                 console.log("333");
               });
 
-
-
               this.test = "efaef";
               // let userInfo = await byLevelGetUserInfo(2);
             case 3:case "end":return _context.stop();}}}, _callee, this);}));function beforeMount() {return _beforeMount.apply(this, arguments);}return beforeMount;}(),

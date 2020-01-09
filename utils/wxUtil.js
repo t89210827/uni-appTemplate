@@ -1,4 +1,4 @@
-import { base64encode, judgeIsAnyNullStr } from "@/utils/api-common"
+import { base64encode, judgeIsAnyNullStr } from "@/utils/common"
 import fly from './api-manager'
 import { api } from './project-api'
 // import store from '../store/index'

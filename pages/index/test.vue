@@ -61,8 +61,6 @@
 				console.log("333");
 			})
 
-
-
 			this.test = "efaef";
 			// let userInfo = await byLevelGetUserInfo(2);
 		},

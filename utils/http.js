@@ -1,4 +1,7 @@
 import axios from '@/js_sdk/gangdiedao-uni-axios'
+import {
+	judgeIsAnyNullStr
+} from './common'
 
 const DEDUG = 2
 let host = ""
@@ -22,7 +25,6 @@ function _reqlog(req) {
 	if (process.env.NODE_ENV === 'development') {
 		console.log("请求地址：" + req.url, req.data || req.params)
 	}
-
 }
 
 /**
@@ -49,18 +51,34 @@ const http = axios.create({
 
 // 拦截器 在请求之前拦截
 http.interceptors.request.use(config => {
-	_reqlog(config)
-	axios.defaults.baseURL = 'https://123123';
-	
-	config.url = host + config.url
+	// _reqlog(config)
 
-	console.log("在请求之前拦截");
-	console.log("请求地址-------->：" + JSON.stringify(axios.defaults))
+	config.url = host + config.url
 	// code...
 	// 获取本地存储的Cookie
 	// const cookie = uni.getStorageSync('cookie')
 	// 设置Cookie
 	// config.headers.Cookie = cookie
+	uni.showLoading({
+	  title: '加载中',
+	  mask: true
+	})
+	
+	var userInfo = uni.getStorageSync("userInfo");
+	if (!judgeIsAnyNullStr(userInfo)) {
+	  if (judgeIsAnyNullStr(request.body.user_id)) {
+	    request.body.user_id = userInfo.id
+	  }
+	  if (judgeIsAnyNullStr(request.body.token)) {
+	    request.body.token = userInfo.token
+	  }
+	}
+	console.log(JSON.stringify(request))
+	request.headers = {
+	  'X-Tag': 'flyio',
+	  'content-type': 'application/json'
+	}
+	
 
 
 	return config
@@ -68,20 +86,20 @@ http.interceptors.request.use(config => {
 
 // 拦截器 在请求之后拦截
 http.interceptors.response.use(response => {
-	_reslog(response)
-	// code...
-	// 获取cookie
-	// let headerStr = JSON.stringify(response.headers)
-	// let cookie = (/(?:Set-Cookie).+;/.exec(headerStr)[0]).replace(/Set-Cookie|:|"/g, "")
-	// if (cookie) {
-	// uni.setStorage({
-	// key: 'cookie',
-	// data: cookie.split(';')[0]
-	// })
-	// }
-	return response
+	// _reslog(response)
+
+	// console.log("----", JSON.stringify(response))
+	uni.hideLoading()
+	return response // 请求成功之后将返回值返回
 }, error => {
-	return Promise.reject(error.message)
+	// return Promise.reject(error.message)
+
+	// 请求出错，根据返回状态码判断出错原因
+	console.log(JSON.stringify(err))
+	uni.hideLoading()
+	if (err) {
+		return '请求失败'
+	};
 })
 
 export default http
