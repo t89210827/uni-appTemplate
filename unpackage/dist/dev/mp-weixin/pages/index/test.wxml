@@ -1,0 +1,1 @@
+<view class="_div data-v-a6ea6178"><view style="width:750rpx;text-align:center;margin-top:200rpx;" class="_div data-v-a6ea6178">我是首页啊</view><view class="_div data-v-a6ea6178">{{test}}</view><i-button vue-id="1" class="data-v-a6ea6178" bind:__l="__l" vue-slots="{{['default']}}">我是iview的组件</i-button></view>
