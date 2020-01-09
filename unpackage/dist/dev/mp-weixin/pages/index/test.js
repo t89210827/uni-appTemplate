@@ -155,7 +155,7 @@ var _projectApi = __webpack_require__(/*! ../../utils/project-api */ 28);
 
 
 
-var _http = _interopRequireDefault(__webpack_require__(/*! ../../utils/http.js */ 29));
+var _apiManager = _interopRequireDefault(__webpack_require__(/*! ../../utils/api-manager.js */ 26));
 
 var _projectApi2 = __webpack_require__(/*! ../../utils/project-api.js */ 28);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 
@@ -180,7 +180,6 @@ var _projectApi2 = __webpack_require__(/*! ../../utils/project-api.js */ 28);fun
 
 
   beforeMount: function () {var _beforeMount = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-              console.log("21313123");
               // get 请求
               // https://debanni.isart.me
               // http.get('page/index/home', [{
@@ -196,16 +195,17 @@ var _projectApi2 = __webpack_require__(/*! ../../utils/project-api.js */ 28);fun
               (0, _projectApi2.home)({
                 invitationCode: 12313 }).
               then(function (response) {
-                console.log(response);
+                console.log(111);
               }).catch(function (error) {
-                console.log(error);
-              }).finally(function () {
-                console.log("333");
+                console.log(2221);
               });
+              // .finally(() => {
+              // 	console.log(333)
+              // })
 
               this.test = "efaef";
               // let userInfo = await byLevelGetUserInfo(2);
-            case 3:case "end":return _context.stop();}}}, _callee, this);}));function beforeMount() {return _beforeMount.apply(this, arguments);}return beforeMount;}(),
+            case 2:case "end":return _context.stop();}}}, _callee, this);}));function beforeMount() {return _beforeMount.apply(this, arguments);}return beforeMount;}(),
   // 分享小程序
   onShareAppMessage: function onShareAppMessage(res) {
     var shareJson = this.$shareUtil({

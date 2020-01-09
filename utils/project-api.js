@@ -1,10 +1,21 @@
 /** 
  * api接口的统一封装
  */
-import request from './http.js';
+import request from './api-manager.js';
+
+function apiShowLoading(loadding_flag, loadding_text) {
+	if (loadding_flag) {
+		//加载提示
+		uni.showLoading({
+			title: loadding_text,
+			mask: true
+		});
+	}
+}
 
 // 发送验证码
-export function home(query) {
+export function home(query, loadding_flag = true, loadding_text = "加载中...") {
+	apiShowLoading(loadding_flag, loadding_text)
 	return request({
 		url: 'page/index/home',
 		method: 'get',

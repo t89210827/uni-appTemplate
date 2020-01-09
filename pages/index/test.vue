@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<div style="width:750rpx;text-align:center;margin-top:200rpx;">我是首页啊</div>
-		<div>{{test}}</div>
-		<i-button>我是iview的组件</i-button>
+		<div>{{test}}1231232</div>
+		<!-- <i-button>我是iview的组件123</i-button> -->
 	</div>
 </template>
 <script>
@@ -13,7 +13,7 @@
 		user_getXCXOpenId
 	} from "../../utils/project-api";
 
-	import http from '../../utils/http.js'
+	import http from '../../utils/api-manager.js'
 
 	import {
 		home
@@ -38,7 +38,6 @@
 		},
 
 		async beforeMount() {
-			console.log("21313123");
 			// get 请求
 			// https://debanni.isart.me
 			// http.get('page/index/home', [{
@@ -54,12 +53,13 @@
 			home({
 				invitationCode: 12313
 			}).then((response) => {
-				console.log(response);
+				console.log(111);
 			}).catch((error) => {
-				console.log(error)
-			}).finally(() => {
-				console.log("333");
+				console.log(2221)
 			})
+			// .finally(() => {
+			// 	console.log(333)
+			// })
 
 			this.test = "efaef";
 			// let userInfo = await byLevelGetUserInfo(2);

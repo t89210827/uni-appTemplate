@@ -1,81 +1,96 @@
-import Fly from 'flyio/dist/npm/wx'
-import { judgeIsAnyNullStr } from './common'
-const fly = new Fly()
-const DEDUG = 1
+import axios from '@/js_sdk/gangdiedao-uni-axios'
+import {
+	judgeIsAnyNullStr
+} from './common'
+
+const DEDUG = 2
 let host = ""
 
 switch (DEDUG) {
-  case 1: host = 'https://ylc.isart.me/api/'; break;            //正式环境
-  case 2: host = 'http://defky.isart.me/api/'; break;           //测试环境
-  case 3: host = 'http://localhost/fkySrv/public/api'; break;   //本地环境
+	case 1:
+		host = 'https://ylc.isart.me/api/';
+		break; //正式环境
+	case 2:
+		host = 'https://debanni.isart.me/api/';
+		break; //测试环境
+	case 3:
+		host = 'http://localhost/fkySrv/public/api';
+		break; //本地环境
 }
 
-// 添加请求拦截器
-fly.interceptors.request.use((request) => {
-  // console.log("-----");
-  wx.showLoading({
-    title: '加载中',
-    mask: true
-  })
-  var userInfo = wx.getStorageSync("userInfo");
+/**
+ * 请求接口日志记录
+ */
+function _reqlog(req) {
+	if (process.env.NODE_ENV === 'development') {
+		console.log("请求地址：" + req.url, req.data || req.params)
+	}
+}
 
-  if (!judgeIsAnyNullStr(userInfo)) {
-    if (judgeIsAnyNullStr(request.body.user_id)) {
-      request.body.user_id = userInfo.id
-    }
-    if (judgeIsAnyNullStr(request.body.token)) {
-      request.body.token = userInfo.token
-    }
-  }
-  console.log(JSON.stringify(request))
-  request.headers = {
-    'X-Tag': 'flyio',
-    'content-type': 'application/json'
-  }
-  return request
+/**
+ * 响应接口日志记录
+ */
+function _reslog(res) {
+	if (process.env.NODE_ENV === 'development') {
+		console.log(`${res.config.url}响应结果：`, res)
+	}
+}
+
+// 创建自定义接口服务实例
+const http = axios.create({
+	// baseURL: [baseURL],
+	timeout: 6000, // 不可超过 manifest.json 中配置 networkTimeout的超时时间
+	// #ifdef H5
+	withCredentials: true,
+	// #endif
+	headers: {
+		'Content-Type': 'application/json',
+		//'X-Requested-With': 'XMLHttpRequest',
+	},
 })
 
-// 添加响应拦截器
-fly.interceptors.response.use(
-  async (response) => {
-    wx.hideLoading()
-    // console.log("----", JSON.stringify(response))
-    return response // 请求成功之后将返回值返回
-  },
-  (err) => {
-    // 请求出错，根据返回状态码判断出错原因
-    console.log(JSON.stringify(err))
-    wx.hideLoading()
-    if (err) {
-      return '请求失败'
-    };
-  }
-)
-fly.config.baseURL = host
+// 拦截器 在请求之前拦截
+http.interceptors.request.use(config => {
+	// _reqlog(config)
+
+	config.url = host + config.url
+	// code...
+	// 获取本地存储的Cookie
+	// const cookie = uni.getStorageSync('cookie')
+	// 设置Cookie
+	// config.headers.Cookie = cookie
 
 
-//封装接口调用
-//@param
-// that:页面实例，即页面的vm=this,应传入页面实例
-// url:相对的url地址，因为在flyio中已经设置了baseUrl
-// method:get or post
-// callback：成功的回调函数
-// loadding_flag:是否有加载提示
-// loadding_text:加载提示的文字
-export function http_flyio(url, method = "get", param, callback, loadding_flag = true, loadding_text = "加载中...") {
-  if (loadding_flag) {
-    //加载提示
-    wx.showLoading({
-      title: loadding_text,
-      mask: true
-    });
-  }
-  fly.request({
-    method: method, //post/get 请求方式
-    url: url,
-    body: param
-  })
-    .then(res => callback(res));
-}
+	// var userInfo = uni.getStorageSync("userInfo");
+	// if (!judgeIsAnyNullStr(userInfo)) {
+	// 	if (judgeIsAnyNullStr(config.body.user_id)) {
+	// 		config.body.user_id = userInfo.id
+	// 	}
+	// 	if (judgeIsAnyNullStr(config.body.token)) {
+	// 		config.body.token = userInfo.token
+	// 	}
+	// }
+	// console.log(JSON.stringify(config))
+	
+	return config
+})
 
-export default fly
+// 拦截器 在请求之后拦截
+http.interceptors.response.use(response => {
+	// _reslog(response)
+
+	console.log("拦截器:", JSON.stringify(response))
+	uni.hideLoading()
+	return response // 请求成功之后将返回值返回
+}, error => {
+	// return Promise.reject(error.message)
+
+	// 请求出错，根据返回状态码判断出错原因
+	console.log(JSON.stringify(error))
+	uni.hideLoading()
+	if (error) {
+		return '请求失败'
+	};
+})
+
+export default http
